@@ -1,9 +1,11 @@
-package chemilmakhlouta.abcnewsproject;
+package chemilmakhlouta.abcnewsproject.presentation.news.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import chemilmakhlouta.abcnewsproject.R;
+
+public class NewsListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
