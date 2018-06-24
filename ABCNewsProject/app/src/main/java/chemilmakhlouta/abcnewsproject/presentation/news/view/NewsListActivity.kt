@@ -1,13 +1,13 @@
 package chemilmakhlouta.abcnewsproject.presentation.news.view
 
-import android.support.v7.app.AppCompatActivity
+import android.app.Activity
 import android.os.Bundle
 import chemilmakhlouta.abcnewsproject.R
 import chemilmakhlouta.abcnewsproject.application.injection.component.ActivityComponent
 import chemilmakhlouta.abcnewsproject.presentation.news.presenter.NewsListPresenter
 import javax.inject.Inject
 
-class NewsListActivity : AppCompatActivity(), NewsListPresenter.Display, NewsListPresenter.Router {
+class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresenter.Router {
 
     @Inject
     lateinit var presenter: NewsListPresenter
