@@ -1,5 +1,7 @@
 package chemilmakhlouta.abcnewsproject.presentation.news.presenter
 
+import android.util.Log
+import android.widget.Toast
 import chemilmakhlouta.abcnewsproject.application.Presenter
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
 import chemilmakhlouta.abcnewsproject.domain.news.usecase.GetNewsUseCase
@@ -57,16 +59,24 @@ class NewsListPresenter @Inject constructor(private val getNewsUseCase: GetNewsU
     }
 
     private fun onNewsListSuccess(news: List<NewsObject>) {
-
+        if (news.isEmpty()) {
+            //            display.showEmptyProductList()
+        } else {
+            //            display.showNewsList()
+            display.setUpNewsList(mutableListOf<NewsObject>().apply {
+                addAll(news)
+            })
+        }
     }
 
     private fun onNewsListFailure(throwable: Throwable) {
-
+        Log.e("Presenter", throwable.message)
     }
 
     interface Display {
         fun showLoading()
         fun hideLoading()
+        fun setUpNewsList(news: MutableList<NewsObject>)
 
     }
 

@@ -5,6 +5,7 @@ import chemilmakhlouta.abcnewsproject.domain.news.NewsRepository
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -16,5 +17,5 @@ class NewsModule {
 
     @Provides
     @Singleton
-    fun provideNewsRepository(retrofit: Retrofit): NewsRepository = NewsService(retrofit)
+    fun provideNewsRepository(@Named(RetrofitModule.RETROFIT) retrofit: Retrofit): NewsRepository = NewsService(retrofit)
 }

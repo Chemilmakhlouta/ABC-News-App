@@ -33,6 +33,10 @@ ext {
     spekVersion = '1.0.89'
 }
 
+kapt {
+    generateStubs = true
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -45,13 +49,15 @@ dependencies {
             "com.android.support:recyclerview-v7:$androidSupportVersion",
             "org.jetbrains.kotlin:kotlin-stdlib:1.1.1"
 
+    compile 'com.android.support:multidex:1.0.1'
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib:1.1.1"
 
     // Dagger (for dependency injection)
     compile "com.google.dagger:dagger:2.7"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.7"
+    kapt "com.google.dagger:dagger-compiler:2.7"
 
     // RxJava
     compile "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",

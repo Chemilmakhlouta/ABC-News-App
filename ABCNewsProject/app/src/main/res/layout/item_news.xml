@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/top_section"
     android:layout_width="match_parent"
     android:layout_height="140dp"
     android:layout_marginBottom="17dp"
@@ -18,7 +17,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/item_title"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:padding="15dp"
@@ -27,7 +26,7 @@
             android:textSize="19sp" />
 
         <TextView
-            android:id="@+id/item_datetime"
+            android:id="@+id/dateTime"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="bottom"
@@ -37,7 +36,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/article_image"
+        android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3.25"
