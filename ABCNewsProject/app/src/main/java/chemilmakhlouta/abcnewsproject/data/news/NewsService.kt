@@ -1,5 +1,6 @@
 package chemilmakhlouta.abcnewsproject.data.news
 
+import chemilmakhlouta.abcnewsproject.data.news.common.ResponseBody
 import chemilmakhlouta.abcnewsproject.data.news.model.NewsObjectResponse
 import chemilmakhlouta.abcnewsproject.domain.news.NewsRepository
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
@@ -16,12 +17,12 @@ class NewsService @Inject constructor(retrofit: Retrofit) : NewsRepository {
     private val client = retrofit.create(NewsClient::class.java)
 
     override fun getNews(): Single<List<NewsObject>> =
-            client.getNews().map { mapToDomainNewsList() }
+            client.getNews().map { mapToDomainNewsList(it.data!!.items) }
 
 
     private interface NewsClient {
         @GET("https://api.rss2json.com/v1/api.json?rss_url=http://www.abc.net.au/news/feed/51120/rss.xml")
-        fun getNews(): Single<List<NewsObjectResponse>>
+        fun getNews(): Single<ResponseBody<List<NewsObjectResponse>>>
     }
 
 }
