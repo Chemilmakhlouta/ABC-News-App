@@ -1,10 +1,10 @@
 package chemilmakhlouta.abcnewsproject.presentation.news.presenter
 
+import chemilmakhlouta.abcnewsproject.domain.news.model.Enclosure
+import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
 import chemilmakhlouta.abcnewsproject.domain.news.usecase.GetNewsUseCase
-import chemilmakhlouta.abcnewsproject.presentation.news.presenter.NewsListPresenter
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.*
+import io.reactivex.Single
 import org.jetbrains.spek.api.SubjectSpek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
@@ -13,8 +13,8 @@ import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 
 /**
- * Created by Chemil Makhlouta on 23/6/18.
- */
+* Created by Chemil Makhlouta on 23/6/18.
+*/
 @RunWith(JUnitPlatform::class)
 class NewsListPresenterTest : SubjectSpek<NewsListPresenter>(
         {
@@ -25,10 +25,16 @@ class NewsListPresenterTest : SubjectSpek<NewsListPresenter>(
 
             val mockUrl = "google.com"
 
+            val mockEnclosure = Enclosure("pathToImage")
+            val mockNewsSuccess = Single.just(listOf(NewsObject("title", "date", "thumbnail", "link", mockEnclosure)))
+            var mockNewsResponse = mockNewsSuccess
+
             subject {
                 getNewsUseCase = mock()
 
                 val presenter = NewsListPresenter(getNewsUseCase)
+
+                whenever(getNewsUseCase.getNews()).doReturn(mockNewsResponse)
                 display = mock()
                 router = mock()
                 presenter.inject(display, router)
@@ -58,9 +64,19 @@ class NewsListPresenterTest : SubjectSpek<NewsListPresenter>(
 
                 on("swiping the list down") {
                     it("refreshes the list") {
+                        mockNewsResponse = mockNewsSuccess
                         subject.onSwipeToRefresh()
 
                         verify(display).setUpNewsList(any())
+                    }
+                }
+
+                on("getting an error when trying to attain news") {
+                    it("displays an error message") {
+                        mockNewsResponse = Single.error(Throwable())
+                        subject.onSwipeToRefresh()
+
+                        verify(display).showError()
                     }
                 }
             }

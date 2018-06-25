@@ -1,6 +1,7 @@
 package chemilmakhlouta.abcnewsproject.data.news
 
 import chemilmakhlouta.abcnewsproject.data.news.model.NewsObjectResponse
+import chemilmakhlouta.abcnewsproject.domain.news.model.Enclosure
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
 
 /**
@@ -11,7 +12,7 @@ fun mapToDomainNewsList(newsList: List<NewsObjectResponse>?): List<NewsObject> {
 
     newsList.let {
         it?.map {
-            NewsObject(it.title, it.pubDate, it.guid, it.author, it.thumbnail, it.description, it.content, it.link)
+            NewsObject(it.title, it.pubDate, it.thumbnail, it.link, Enclosure(it.enclosure.link))
         }?.let {
             mappedNewsList.addAll(it)
         }

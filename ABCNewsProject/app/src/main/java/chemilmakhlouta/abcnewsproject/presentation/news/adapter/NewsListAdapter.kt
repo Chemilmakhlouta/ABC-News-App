@@ -29,7 +29,15 @@ class NewsListAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
         with(holder.itemView) {
             title.text = newsItem.title
 
-            if (!newsItem.thumbnail.isEmpty()) {
+            var thumbnailUrl = ""
+            if(position == 0) {
+                thumbnailUrl = newsItem.enclosure.link
+            }
+            else {
+                thumbnailUrl = newsItem.thumbnail
+            }
+
+            if (!thumbnailUrl.isEmpty()) {
                 Picasso.with(context)
                         .load(newsItem.thumbnail)
                         .fit()

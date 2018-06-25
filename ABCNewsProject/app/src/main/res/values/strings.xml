@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ABCNewsProject</string>
+
+    <string name="this_just_in">Just in!!!</string>
+    <string name="default_news_title">Default News Title</string>
+    <string name="default_news_date">11-11-1994</string>
+
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="140dp"
     android:layout_marginBottom="17dp"
@@ -21,9 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:padding="15dp"
-            android:text="Testing"
+            tools:text="@string/default_news_title"
             android:textColor="@color/colorPrimary"
-            android:textSize="19sp" />
+            android:textSize="19sp"/>
 
         <TextView
             android:id="@+id/dateTime"
@@ -31,7 +32,8 @@
             android:layout_height="match_parent"
             android:gravity="bottom"
             android:paddingBottom="15dp"
-            android:paddingLeft="15dp" />
+            android:paddingLeft="15dp"
+            tools:text="@string/default_news_date"/>
 
     </LinearLayout>
 
@@ -40,5 +42,5 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3.25"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"/>
 </LinearLayout>

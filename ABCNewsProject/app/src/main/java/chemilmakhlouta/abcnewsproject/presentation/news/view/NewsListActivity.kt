@@ -11,7 +11,7 @@ import chemilmakhlouta.abcnewsproject.application.injection.component.DaggerActi
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
 import chemilmakhlouta.abcnewsproject.presentation.news.adapter.NewsListAdapter
 import chemilmakhlouta.abcnewsproject.presentation.news.presenter.NewsListPresenter
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_news.*
 import javax.inject.Inject
 import chemilmakhlouta.abcnewsproject.data.news.common.extension.navigateToExternalUrl
 
@@ -33,7 +33,7 @@ class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresente
                 .build()
         inject(activityComponent)
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_news)
 
         newsList.layoutManager = LinearLayoutManager(this)
         newsListAdapter = NewsListAdapter(this)

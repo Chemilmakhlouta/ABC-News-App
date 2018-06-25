@@ -10,16 +10,18 @@
     <LinearLayout
         android:id="@+id/justInLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white"
-        android:layout_marginBottom="4dp">
+        android:layout_height="60dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:gravity="center_vertical"
-            android:text="Just in!"
+            android:text="@string/this_just_in"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
             />
     </LinearLayout>
 
