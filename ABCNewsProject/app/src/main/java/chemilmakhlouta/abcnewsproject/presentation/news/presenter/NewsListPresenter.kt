@@ -28,7 +28,7 @@ class NewsListPresenter @Inject constructor(private val getNewsUseCase: GetNewsU
         getNews()
     }
 
-    override fun onResume() = subscribeToGetNews()
+    override fun onResume() = getNews()
 
     override fun onPause() = getNewsListSubscription.dispose()
 
