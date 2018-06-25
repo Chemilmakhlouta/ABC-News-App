@@ -1,5 +1,7 @@
 package chemilmakhlouta.abcnewsproject.domain.news.model
 
+import java.util.Calendar
+
 /**
  * Created by Chemil Makhlouta on 23/6/18.
  */

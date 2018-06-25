@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import chemilmakhlouta.abcnewsproject.R
+import chemilmakhlouta.abcnewsproject.data.news.common.extension.parseDateTime
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_news.view.*
 
 /**
@@ -15,10 +17,6 @@ import kotlinx.android.synthetic.main.item_news.view.*
 class NewsListAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var newsList: List<NewsObject> = emptyList()
-
-    private companion object {
-        const val TOP_NEWS_ITEM = 0
-    }
 
     private lateinit var listItemClickListener: OnNewsListItemClickListener
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
@@ -30,6 +28,16 @@ class NewsListAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
         val newsItem = newsList[position]
         with(holder.itemView) {
             title.text = newsItem.title
+
+            if (!newsItem.thumbnail.isEmpty()) {
+                Picasso.with(context)
+                        .load(newsItem.thumbnail)
+                        .fit()
+                        .centerInside()
+                        .into(image)
+            }
+
+            dateTime.text = newsItem.pubDate.parseDateTime()
         }
     }
 

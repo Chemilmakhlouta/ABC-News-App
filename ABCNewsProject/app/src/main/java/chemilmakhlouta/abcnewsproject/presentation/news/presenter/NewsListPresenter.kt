@@ -5,9 +5,7 @@ import chemilmakhlouta.abcnewsproject.application.Presenter
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
 import chemilmakhlouta.abcnewsproject.domain.news.usecase.GetNewsUseCase
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -29,6 +27,8 @@ class NewsListPresenter @Inject constructor(private val getNewsUseCase: GetNewsU
     override fun onStart() {
         getNews()
     }
+
+    fun onSwipeToRefresh() = getNews()
 
     override fun onResume() = subscribeToGetNews()
 
@@ -59,16 +59,15 @@ class NewsListPresenter @Inject constructor(private val getNewsUseCase: GetNewsU
         }
     }
 
-    private fun onNewsListSuccess(news: List<NewsObject>) {
-        if (news.isEmpty()) {
-            //            display.showEmptyProductList()
-        } else {
-            //            display.showNewsList()
-            display.setUpNewsList(mutableListOf<NewsObject>().apply {
-                addAll(news)
-            })
-        }
-    }
+    private fun onNewsListSuccess(news: List<NewsObject>) =
+            if (news.isEmpty()) {
+//                display.showEmptyNewsList()
+            } else {
+//                display.showNewsList()
+                display.setUpNewsList(mutableListOf<NewsObject>().apply {
+                    addAll(news)
+                })
+            }
 
     private fun onNewsListFailure(throwable: Throwable) {
         Log.e("Presenter", throwable.message)

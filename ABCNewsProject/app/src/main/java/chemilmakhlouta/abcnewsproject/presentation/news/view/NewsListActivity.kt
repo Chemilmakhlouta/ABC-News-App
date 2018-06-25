@@ -12,6 +12,8 @@ import chemilmakhlouta.abcnewsproject.presentation.news.adapter.NewsListAdapter
 import chemilmakhlouta.abcnewsproject.presentation.news.presenter.NewsListPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+import android.support.v4.widget.SwipeRefreshLayout
+
 
 class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresenter.Router, NewsListAdapter.OnNewsListItemClickListener {
 
@@ -34,6 +36,8 @@ class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresente
         newsListAdapter = NewsListAdapter(this)
         newsListAdapter.setNewsListItemClickListener(this)
         newsList.adapter = newsListAdapter
+
+        swipeContainer.setOnRefreshListener { presenter.onSwipeToRefresh() }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -48,9 +52,11 @@ class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresente
     }
 
     override fun showLoading() {
+        swipeContainer.isRefreshing = true
     }
 
     override fun hideLoading() {
+        swipeContainer.isRefreshing = false
     }
 
     override fun onNewsItemClicked() {
