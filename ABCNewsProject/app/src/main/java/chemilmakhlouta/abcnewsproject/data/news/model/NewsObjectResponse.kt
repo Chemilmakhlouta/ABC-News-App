@@ -9,4 +9,5 @@ data class NewsObjectResponse(val title: String,
                               val author: String,
                               val thumbnail: String,
                               val description: String,
-                              val content: String)
+                              val content: String,
+                              val link: String)

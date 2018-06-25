@@ -1,8 +1,6 @@
 package chemilmakhlouta.abcnewsproject.data.news
 
-import chemilmakhlouta.abcnewsproject.data.news.common.ResponseBody
-import chemilmakhlouta.abcnewsproject.data.news.common.ResponseData
-import chemilmakhlouta.abcnewsproject.data.news.model.NewsObjectResponse
+
 import chemilmakhlouta.abcnewsproject.data.news.model.NewsResponse
 import chemilmakhlouta.abcnewsproject.domain.news.NewsRepository
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject

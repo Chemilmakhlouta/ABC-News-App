@@ -1,6 +1,5 @@
 package chemilmakhlouta.abcnewsproject.presentation.news.presenter
 
-import android.util.Log
 import chemilmakhlouta.abcnewsproject.application.Presenter
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
 import chemilmakhlouta.abcnewsproject.domain.news.usecase.GetNewsUseCase
@@ -19,6 +18,7 @@ class NewsListPresenter @Inject constructor(private val getNewsUseCase: GetNewsU
     private var getNewsListObservable: Single<List<NewsObject>>? = null
     private var getNewsListSubscription = Disposables.disposed()
 
+    // region lifecycle
     fun inject(display: Display, router: Router) {
         this.display = display
         this.router = router
@@ -28,8 +28,6 @@ class NewsListPresenter @Inject constructor(private val getNewsUseCase: GetNewsU
         getNews()
     }
 
-    fun onSwipeToRefresh() = getNews()
-
     override fun onResume() = subscribeToGetNews()
 
     override fun onPause() = getNewsListSubscription.dispose()
@@ -37,7 +35,15 @@ class NewsListPresenter @Inject constructor(private val getNewsUseCase: GetNewsU
     override fun onStop() {
         getNewsListObservable = null
     }
+    // endregion
 
+    // region UI Interactions
+    fun onSwipeToRefresh() = getNews()
+
+    fun onNewsClicked(url: String) = router.navigateToLink(url)
+    // endregion
+
+    // region Private Functions
     private fun getNews() {
         if (getNewsListObservable == null) {
             getNewsListObservable = getNewsUseCase.getNews()
@@ -60,27 +66,23 @@ class NewsListPresenter @Inject constructor(private val getNewsUseCase: GetNewsU
     }
 
     private fun onNewsListSuccess(news: List<NewsObject>) =
-            if (news.isEmpty()) {
-//                display.showEmptyNewsList()
-            } else {
-//                display.showNewsList()
-                display.setUpNewsList(mutableListOf<NewsObject>().apply {
-                    addAll(news)
-                })
-            }
+            display.setUpNewsList(mutableListOf<NewsObject>().apply {
+                addAll(news)
+            })
 
     private fun onNewsListFailure(throwable: Throwable) {
-        Log.e("Presenter", throwable.message)
+        display.showError()
     }
+    // endregion
 
     interface Display {
         fun showLoading()
         fun hideLoading()
         fun setUpNewsList(news: MutableList<NewsObject>)
-
+        fun showError()
     }
 
     interface Router {
-
+        fun navigateToLink(url: String)
     }
 }

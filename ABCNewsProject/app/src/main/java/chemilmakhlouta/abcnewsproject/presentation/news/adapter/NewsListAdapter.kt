@@ -38,6 +38,8 @@ class NewsListAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
             }
 
             dateTime.text = newsItem.pubDate.parseDateTime()
+
+            setOnClickListener { listItemClickListener.onNewsItemClicked(newsItem.link) }
         }
     }
 
@@ -60,12 +62,11 @@ class NewsListAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
     private class NormalNewsListItemViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     interface OnNewsListItemClickListener {
-        fun onNewsItemClicked()
+        fun onNewsItemClicked(url: String)
     }
 
     fun setNewsList(news: MutableList<NewsObject>) {
         newsList = news
         notifyDataSetChanged()
     }
-
 }

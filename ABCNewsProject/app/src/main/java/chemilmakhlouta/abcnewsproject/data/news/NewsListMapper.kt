@@ -11,7 +11,7 @@ fun mapToDomainNewsList(newsList: List<NewsObjectResponse>?): List<NewsObject> {
 
     newsList.let {
         it?.map {
-            NewsObject(it.title, it.pubDate, it.guid, it.author, it.thumbnail, it.description, it.content)
+            NewsObject(it.title, it.pubDate, it.guid, it.author, it.thumbnail, it.description, it.content, it.link)
         }?.let {
             mappedNewsList.addAll(it)
         }

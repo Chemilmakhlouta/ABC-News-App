@@ -3,6 +3,7 @@ package chemilmakhlouta.abcnewsproject.presentation.news.view
 import android.app.Activity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import chemilmakhlouta.abcnewsproject.R
 import chemilmakhlouta.abcnewsproject.application.NewsApplication
 import chemilmakhlouta.abcnewsproject.application.injection.component.ActivityComponent
@@ -12,7 +13,7 @@ import chemilmakhlouta.abcnewsproject.presentation.news.adapter.NewsListAdapter
 import chemilmakhlouta.abcnewsproject.presentation.news.presenter.NewsListPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
-import android.support.v4.widget.SwipeRefreshLayout
+import chemilmakhlouta.abcnewsproject.data.news.common.extension.navigateToExternalUrl
 
 
 class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresenter.Router, NewsListAdapter.OnNewsListItemClickListener {
@@ -21,6 +22,8 @@ class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresente
     lateinit var presenter: NewsListPresenter
 
     private lateinit var newsListAdapter: NewsListAdapter
+
+    // region lifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +54,20 @@ class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresente
         presenter.inject(this, this)
     }
 
+    // endregion
+
+    // region NewsListAdapter callbacks
+    override fun onNewsItemClicked(url: String) {
+        presenter.onNewsClicked(url)
+    }
+    // endregion
+
+    // region Display
+    override fun setUpNewsList(news: MutableList<NewsObject>) {
+        val adapter = (newsList.adapter as NewsListAdapter)
+        adapter.setNewsList(news)
+    }
+
     override fun showLoading() {
         swipeContainer.isRefreshing = true
     }
@@ -59,11 +76,14 @@ class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresente
         swipeContainer.isRefreshing = false
     }
 
-    override fun onNewsItemClicked() {
+    override fun showError() {
+        Toast.makeText(applicationContext,"Something went wrong",Toast.LENGTH_LONG).show()
     }
+    // enregion
 
-    override fun setUpNewsList(news: MutableList<NewsObject>) {
-        val adapter = (newsList.adapter as NewsListAdapter)
-        adapter.setNewsList(news)
+    // region Router
+    override fun navigateToLink(url: String) {
+        applicationContext.navigateToExternalUrl(url)
     }
+    // endregion
 }
