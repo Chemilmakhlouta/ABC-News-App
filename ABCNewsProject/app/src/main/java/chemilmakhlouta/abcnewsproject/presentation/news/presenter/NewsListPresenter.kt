@@ -1,12 +1,13 @@
 package chemilmakhlouta.abcnewsproject.presentation.news.presenter
 
 import android.util.Log
-import android.widget.Toast
 import chemilmakhlouta.abcnewsproject.application.Presenter
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
 import chemilmakhlouta.abcnewsproject.domain.news.usecase.GetNewsUseCase
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**

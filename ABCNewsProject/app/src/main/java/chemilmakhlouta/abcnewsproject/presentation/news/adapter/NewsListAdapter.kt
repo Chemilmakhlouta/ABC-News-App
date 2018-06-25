@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import chemilmakhlouta.abcnewsproject.R
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
 import kotlinx.android.synthetic.main.item_news.view.*
-import java.lang.IllegalArgumentException
 
 /**
  * Created by Chemil Makhlouta on 24/6/18.
  */
-class NewsListAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsListAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var newsList: List<NewsObject> = listOf()
+    private var newsList: List<NewsObject> = emptyList()
 
     private companion object {
         const val TOP_NEWS_ITEM = 0
@@ -38,9 +37,9 @@ class NewsListAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == 0) {
-            return TopNewsListItemViewHolder(layoutInflater.inflate(R.layout.item_top_news, parent, false))
+            return TopNewsListItemViewHolder(LayoutInflater.from(context).inflate(R.layout.item_top_news, parent, false))
         } else {
-            return NormalNewsListItemViewHolder(layoutInflater.inflate(R.layout.item_news, parent, false))
+            return NormalNewsListItemViewHolder(LayoutInflater.from(context).inflate(R.layout.item_news, parent, false))
         }
     }
 

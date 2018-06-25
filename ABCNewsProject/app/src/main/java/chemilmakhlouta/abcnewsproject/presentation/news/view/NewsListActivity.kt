@@ -2,9 +2,11 @@ package chemilmakhlouta.abcnewsproject.presentation.news.view
 
 import android.app.Activity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import chemilmakhlouta.abcnewsproject.R
 import chemilmakhlouta.abcnewsproject.application.NewsApplication
 import chemilmakhlouta.abcnewsproject.application.injection.component.ActivityComponent
+import chemilmakhlouta.abcnewsproject.application.injection.component.DaggerActivityComponent
 import chemilmakhlouta.abcnewsproject.domain.news.model.NewsObject
 import chemilmakhlouta.abcnewsproject.presentation.news.adapter.NewsListAdapter
 import chemilmakhlouta.abcnewsproject.presentation.news.presenter.NewsListPresenter
@@ -28,10 +30,16 @@ class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresente
 
         setContentView(R.layout.activity_main)
 
-
+        newsList.layoutManager = LinearLayoutManager(this)
         newsListAdapter = NewsListAdapter(this)
         newsListAdapter.setNewsListItemClickListener(this)
         newsList.adapter = newsListAdapter
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+
+        presenter.onStart()
     }
 
     fun inject(activityComponent: ActivityComponent) {
@@ -40,15 +48,12 @@ class NewsListActivity : Activity(), NewsListPresenter.Display, NewsListPresente
     }
 
     override fun showLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun hideLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onNewsItemClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun setUpNewsList(news: MutableList<NewsObject>) {
